@@ -18,6 +18,16 @@ class GreetingBase{
 	}
 }
 
+
+class Sample{
+	public static void staticRes(String str) {
+		System.out.println("Static resource conveying message : " + str);
+	}
+	public void instanceRes(String str) {
+		System.out.println("Instance resource conveying message : " + str);
+	}
+}
+
 public class MyApp {
 
 	public static void main(String[] args) {
@@ -26,7 +36,8 @@ public class MyApp {
 		// greeting.conveyMessage("Hello All");
 		
 		Greeting greetEmail = new EmailGreeting();
-		greeting.conveyMessage("Hello All", greetEmail);
+		// greeting.conveyMessage("Hello All", greetEmail);
+		greeting.conveyMessage("Hello All", new EmailGreeting());
 		
 		Greeting greetSms = new SmsGreeting();
 		greeting.conveyMessage("Hello All", greetSms);
@@ -78,6 +89,15 @@ public class MyApp {
 		// inject functionality directly
 		 greeting.conveyMessage("Hello All", message -> System.out.println("Send over Custom : " + message));
 		
+		// any method from any class can be used for reference 
+		 // method refrence
+		 Greeting thirdParty = Sample :: staticRes;
+		 // greeting.conveyMessage("Hello All", thirdParty);
+		 greeting.conveyMessage("Hello All", Sample :: staticRes);
+		 Sample S1 = new Sample();
+		 greeting.conveyMessage("Hello All", S1 :: instanceRes);
+		 // greeting.conveyMessage("Hello All", Sample :: new);
+		 
 	}
 
 }
