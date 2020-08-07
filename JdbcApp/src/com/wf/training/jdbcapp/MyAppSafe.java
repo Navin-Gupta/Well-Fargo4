@@ -1,20 +1,15 @@
 package com.wf.training.jdbcapp;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 
 
-class Sample{
-	
-}
-
-
-public class MyApp {
+public class MyAppSafe {
 
 	private static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String MYSQL_URL = "jdbc:mysql://localhost/trainingdb";
@@ -22,40 +17,39 @@ public class MyApp {
 	private static final String MYSQL_PASSWORD = "";
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
-		// load the mysql driver (class) in memory
 		try {
-			// to load any java class in memory
-			// Class.forName("com.wf.training.jdbcapp.Sample");
 			Class.forName(MYSQL_DRIVER);
 			Connection conn = 
 					DriverManager.getConnection(MYSQL_URL, 
 												MYSQL_USERNAME, 
 												MYSQL_PASSWORD);
-			Statement stmt = conn.createStatement();
-			// statement class exposes all method to talk with DB 
+			 
+			 // fixed templated/prepared query
+			 PreparedStatement pstmt =  
+					 conn.prepareStatement("insert into employee values(?,?,?)");
+			 
+			String name = "";
+			String email = "";
+			int age = 20;
+			 // set values in placeholder
+			 pstmt.setString(0, name);
+			 pstmt.setString(1, email);
+			 pstmt.setInt(2, age);
+			 
+			 // pstmt.setBlob(parameterIndex, x);
+			 
 			
-			// fire the query
-			ResultSet rs = stmt.executeQuery("select * from employee"); // select 
+			 // pstmt.executeQuery(); // select
+			 pstmt.executeUpdate(); // DMQ
+			 
+			 pstmt.clearParameters();
 			
-			// conn.close();
-			/*if(rs.next()) {
-				rs.getString(1);  // col indexing is 1 based
-				rs.getString("empname");
-			}*/
-
-			while(rs.next()) {
-				System.out.println(rs.getString(2) 
-								   + " | "  
-								   + rs.getString(3)
-								   + " | "
-								   + rs.getInt(4));
-			}
-  		    rs.close();
+			String query = "insert into employee values('" + name + "','" + email + "'," + age + ")";
+			
+  		    
 			conn.close();
-			// int n = stmt.executeUpdate(""); // insert, update, delete(DMQ)
-			// n : number of rows affected
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -65,5 +59,6 @@ public class MyApp {
 			e.printStackTrace();
 		}
 	}
+
 
 }
