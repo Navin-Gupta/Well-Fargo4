@@ -11,9 +11,10 @@
 <body>
 	<%
 		String username = session.getAttribute("username").toString();
+		String id = "msg";
 	 request.getMethod();
 	%>
-	<h1>Congratulation! Successfully Logged In</h1>
+	<h1 id="<%=id%>">Congratulation! Successfully Logged In</h1>
 	<h2>Hello <%=username%></h2>
 </body>
 </html>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome to JSP Testing Portal</h1>
-<form action="logincheck.jsp?type=admin" method="post">
+<form action="" method="post">
 	<div><label>Enter login Id</label> : <input type="text" name="uname"/> </div>
 	</br>
 	<div><label>Enter Password</label> : <input type="password" name="password"/> </div>

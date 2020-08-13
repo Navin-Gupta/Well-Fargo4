@@ -10,13 +10,14 @@
 	<%
 		String uname = request.getParameter("uname");
 		String password = request.getParameter("password");
+		String type = request.getParameter("type");
 	%>
 	<%
 		if(uname.equals("First") && password.equals("abc")){
 	%>
 	<!-- writer.write("<h1>Congratulation! Successfully Logged In</h1>"); -->
 		<h1>Congratulation! Successfully Logged In</h1>
-		<h2>Hello <%=uname%></h2>
+		<h2>Hello <%=uname%> (<%=type%>)</h2>
 	<% } else { %>
 	
 	<h1>Sorry! Could not log in</h1>
