@@ -30,6 +30,12 @@ public class EmployeeController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    // for injecting DAO for Testing
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+    	this.employeeDao = employeeDao;
+    }
+    
 
 	/**
 	 * @see Servlet#init(ServletConfig)
@@ -47,7 +53,7 @@ public class EmployeeController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// receive the action parameter
 		String action = request.getParameter("action");
